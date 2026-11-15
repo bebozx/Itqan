@@ -38,10 +38,10 @@ The seed script creates demo users for each role. All data in this repository is
 
 | Role | Username | Password |
 |------|----------|----------|
-| Admin | `TODO` | `TODO` |
-| Supervisor | `TODO` | `TODO` |
-| Teacher | `TODO` | `TODO` |
-| Student | `TODO` | `TODO` |
+| Admin | `admin` | `admin123` |
+| Supervisor | `m1` | `1234` |
+| Teacher | `t1` | `1234` |
+| Student | `s1 … s6` | `1234` |
 
 ## Project Structure
 
