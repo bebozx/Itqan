@@ -1,35 +1,73 @@
-# إتقان — منصة التقييم التكويني
+# Itqan (إتقان)
 
-## التشغيل محلياً (ويندوز / ماك / لينكس)
-1. ثبّت Node.js (إصدار 20 أو أحدث) من nodejs.org
-2. افتح الطرفية داخل مجلد المشروع:
-```
+A formative assessment platform for schools, inspired by Seneca's question system. Itqan supports daily, low-stakes practice: it helps weaker students retrieve core concepts and pushes stronger students to think beyond the curriculum.
+
+## Features
+
+- **Four roles:** Admin, Subject Supervisor, Teacher, Student
+- **Admin:** creates classes and students from a dashboard
+- **Teacher:** builds questions and assigns assessments
+- **Supervisor:** follows his teachers and tracks student progress
+- **Student:** practices assigned assessments with instant feedback
+- **Individual differences:** a teacher can assign different assessments to different students of the same class at the same time
+- **Seneca-style answer behavior:** a wrong answer stays in place so the student can go back to the book and think again; a correct answer turns green and moves on
+- **No pressure by design:** low-stakes points, no leaderboard by default
+
+## Tech Stack
+
+- **Backend:** Node.js (`server/`), with route modules per role, a grading module, and a data layer
+- **Frontend:** vanilla JavaScript single-page app (`public/`), with a question editor and question renderer shared across roles
+- **Data:** demo data only (see `server/seed.js`)
+
+## Getting Started
+
+Requirements: [Node.js](https://nodejs.org/) 18 or newer.
+
+```bash
+git clone https://github.com/bebozx/Itqan.git
+cd Itqan
 npm install
-npm run seed     # بيانات تجريبية (اختياري)
 npm start
 ```
-3. افتح http://localhost:3000
 
-## الحسابات
-| الدور | المستخدم | كلمة المرور |
-|---|---|---|
-| أدمن | admin | admin123 (هيطلب تغييرها) |
-| مشرف مادة (تجريبي) | m1 | 1234 |
-| معلم (تجريبي) | t1 | 1234 |
-| طلاب (تجريبي) | s1 … s6 | 1234 |
+Then open http://localhost:3000
 
-بدون `npm run seed` هيتعمل حساب الأدمن فقط. امسح مجلد `data/` لو عايز تبدأ من الصفر.
+## Demo Accounts
 
-## الأدوار
-- **الأدمن:** المواد، المستخدمون (إضافة جماعية بتولّد أسماء وكلمات مرور وتنزّلها CSV)، الفصول، إضافة الطلاب للفصول، ربط المعلمين بالفصول والمواد.
-- **المشرف:** ربطه الأدمن بمادة؛ يشوف كل معلمي المادة (نشاط، إنجاز، إتقان الطلاب) ويدخل على فصولهم وأسئلتهم ونتائجهم قراءة فقط.
-- **المعلم:** يربط نفسه بفصل، يعمل مجموعات (يدوي أو اقتراح تلقائي)، يبني المفاهيم والأسئلة (12 نوع)، ويسند تقييمات (ثابت أو تكيّفي) لفصل كامل أو مجموعات أو طلاب محددين — أكثر من تقييم في نفس الوقت لنفس الفصل.
-- **الطالب:** يحل بدون ضغط: الغلط يفضل في مكانه والصح يتنوّر أخضر، تلميحات متدرجة، مراجعة يومية بالتكرار المتباعد.
+The seed script creates demo users for each role. All data in this repository is fictional and for testing only.
 
-## متغيرات البيئة
-`PORT` (3000) · `DB_PATH` (data/itqan.db) · `ADMIN_PASSWORD` · `COOKIE_SECURE=1` (لما يكون على HTTPS)
+| Role | Username | Password |
+|------|----------|----------|
+| Admin | `TODO` | `TODO` |
+| Supervisor | `TODO` | `TODO` |
+| Teacher | `TODO` | `TODO` |
+| Student | `TODO` | `TODO` |
 
-## النشر
-- **سيرفر المدرسة / VPS / Railway:** `npm install && npm start` مع مجلد دائم لقاعدة البيانات (`DB_PATH`).
-- **Netlify:** مش مناسب لهذا المشروع كما هو لأنه سيرفر Node بقاعدة بيانات SQLite (Netlify بيستضيف ملفات ثابتة ودوال مؤقتة بدون تخزين دائم). لو لازم Netlify: الواجهة عليه والـ API على سيرفر منفصل.
-- خد نسخة احتياطية دورية من ملف `data/itqan.db`.
+## Project Structure
+
+```
+server/
+  index.js              App entry point
+  db.js                 Data layer
+  engine.js             Assessment / session logic
+  grade.js              Answer grading
+  routes-admin.js       Admin API
+  routes-teacher.js     Teacher API
+  routes-supervisor.js  Supervisor API
+  routes-student.js     Student API
+  seed.js               Demo data
+public/
+  index.html
+  css/app.css
+  js/                   Per-role views, question editor and renderer
+```
+
+## Roadmap
+
+- Adaptive sessions based on each student's mastery
+- Spaced retrieval: bring back concepts a student struggled with
+- Concept-based mastery tracking per student
+
+## Author
+
+Built by Bahaa ([@bebozx](https://github.com/bebozx)).
